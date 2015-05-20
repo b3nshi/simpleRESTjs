@@ -1,0 +1,38 @@
+{
+  "name": "test",
+  "version": "0.0.1",
+  "mongo": {
+    "server": "mongodb://localhost:27017"
+  },
+  "embedded": [
+    {
+      "name": "comments",
+      "fields":{
+          "_id": {"type": "auto_increment"},
+          "comment": {"type": "String"}
+      }
+    }
+  ],
+  "schemas": [
+    {
+      "name": "notices",
+      "fields":{
+          "_id": {"type": "auto_increment"},
+          "title": {"type": "String"},
+          "category": {
+            "type": "String",
+            "enum": ["General", "Other"]
+          },
+          "description": {
+            "type": "String"
+          },
+          "comments": {
+            "type": "Embedded",
+            "min": "0",
+            "max": "n",
+            "document": "comments"
+          }
+      }
+    }
+  ]
+}
